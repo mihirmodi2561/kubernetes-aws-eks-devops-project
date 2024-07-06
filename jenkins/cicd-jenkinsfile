@@ -26,7 +26,7 @@ pipeline {
           stage('Docker Tag and Push to ECR') {
             steps {
               sh '''
-              aws ecr get-login-password --region ${REGION} | sudo docker login --username AWS --password-stdin ${REGISTRY_PATH}
+              aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 339713093929.dkr.ecr.us-east-1.amazonaws.com
               export IMAGE_ID=$(sudo docker images --filter=reference=${TMP_IMAGE_NAME} --format "{{.ID}}")
               echo $IMAGE_ID
               docker tag ${IMAGE_ID} ${REGISTRY_PATH}/${ECR_REPO_NAME}:${TAG_VERSION}
